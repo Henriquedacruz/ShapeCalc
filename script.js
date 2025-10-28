@@ -130,18 +130,29 @@ let startGame = document.getElementById("startGame");
 let gameScreen = document.getElementById("gameScreen");
 let player = document.getElementById("player");
 let counterText = document.getElementById("counter");
+
 let currentImage = 1;
-let clicks = 0;
+let clickStage = 0; // controla o estágio da flexão (1 = descendo, 2 = subindo)
+let flexCount = 0;  // conta as flexões completas
 
-if(startGame){
-startGame.addEventListener("click", () => {
+if (startGame) {
+  startGame.addEventListener("click", () => {
     gameScreen.style.display = "block";
-});
+  });
 
-player.addEventListener("click", () => {
-    clicks++;
-    counterText.textContent = "Flexões: " + clicks;
+  player.addEventListener("click", () => {
+    // alterna entre imagem 1 e 2
     currentImage = currentImage === 1 ? 2 : 1;
     player.src = "img/" + currentImage + ".PNG";
-});
+
+    // cada clique muda o estágio
+    clickStage++;
+
+    // quando completou 2 cliques (1 ciclo), conta uma flexão
+    if (clickStage === 2) {
+      flexCount++;
+      counterText.textContent = "Flexões: " + flexCount;
+      clickStage = 0; // reseta o ciclo
+    }
+  });
 }
