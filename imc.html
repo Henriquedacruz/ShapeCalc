@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShapeCalc - IMC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🏋️ ShapeCalc</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="calculadoratmb.html">Metabolismo Basal</a>
+            <a href="proteina.html">Proteínas</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Calculadora de IMC</h2>
+        <form id="imcForm">
+            <label>Peso (kg): <input type="number" id="peso" required></label><br><br>
+            <label>Altura (cm): <input type="number" id="altura" required></label><br><br>
+            <button type="button" onclick="calcularIMC()">Calcular</button>
+        </form>
+        <p id="resultado"></p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

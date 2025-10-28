@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShapeCalc - Metabolismo Basal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🏋️ ShapeCalc</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="imc.html">IMC</a>
+            <a href="proteina.html">Proteínas</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Calculadora de Metabolismo Basal</h2>
+        <form id="tmbForm">
+            <label>Sexo:
+                <select id="sexo">
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select>
+            </label><br><br>
+            <label>Idade (anos): <input type="number" id="idade" required></label><br><br>
+            <label>Peso (kg): <input type="number" id="pesoTmb" required></label><br><br>
+            <label>Altura (cm): <input type="number" id="alturaTmb" required></label><br><br>
+            <label>Nível de atividade:
+                <select id="atividade">
+                    <option value="1.2">Sedentário(nenhuma)</option>
+                    <option value="1.375">Leve(1x por semana)</option>
+                    <option value="1.55">Moderado(3x por semana)</option>
+                    <option value="1.725">Intenso(5x por semana)</option>
+                    <option value="1.9">Muito intenso(7x por semana)</option>
+                </select>
+            </label><br><br>
+            <button type="button" onclick="calcularTMB()">Calcular</button>
+        </form>
+        <p id="resultadoTmb"></p>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

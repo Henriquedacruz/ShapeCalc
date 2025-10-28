@@ -1,0 +1,105 @@
+/* Fonte geral mais moderna */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary: #0a74da;
+    --primary-dark: #005bb5;
+    --background: #f4f4f4;
+    --text: #333;
+    --light-grey: #e9e9e9;
+}
+
+/* Estilo geral */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+/* Header com gradiente */
+header {
+    background: linear-gradient(90deg, var(--primary), #00a3ff);
+    color: #fff;
+    padding: 20px;
+}
+
+/* Logo e título */
+header h1 {
+    margin: 0;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+/* Navegação */
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+nav a:hover,
+nav a.active {
+    background-color: var(--primary-dark);
+}
+
+/* Layout centralizado */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Card para formulários */
+.card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-top: 25px;
+}
+
+/* Botões */
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: var(--primary-dark);
+}
+
+/* Ícone central animadinho */
+.hero-icon {
+    transition: 0.3s ease;
+}
+
+.hero-icon:hover {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
