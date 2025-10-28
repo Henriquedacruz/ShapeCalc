@@ -64,11 +64,16 @@ function calcularTMB() {
     const idade = parseFloat(document.getElementById('idade')?.value);
     const peso = parseFloat(document.getElementById('pesoTmb')?.value);
     const altura = parseFloat(document.getElementById('alturaTmb')?.value);
-    const atividade = parseFloat(document.getElementById('atividade')?.value);
-
-    if (!sexo || isNaN(idade) || isNaN(peso) || isNaN(altura) || isNaN(atividade)) return;
+    const atividade = document.getElementById('atividade')?.value;
 
     const erros = [];
+
+    // Validações personalizadas
+    if (!sexo) erros.push({ campo: 'Sexo', valor: '-', mensagem: 'Selecione o sexo.' });
+    if (isNaN(idade)) erros.push({ campo: 'Idade', valor: idade, mensagem: 'Informe a idade corretamente.' });
+    if (isNaN(peso)) erros.push({ campo: 'Peso', valor: peso, mensagem: 'Informe o peso corretamente.' });
+    if (isNaN(altura)) erros.push({ campo: 'Altura', valor: altura, mensagem: 'Informe a altura corretamente.' });
+    if (!atividade) erros.push({ campo: 'Atividade', valor: '-', mensagem: 'Selecione um nível de atividade.' });
 
     if (idade < 0) erros.push({ campo: 'Idade', valor: idade, mensagem: 'Valores negativos não são aceitos!' });
     if (peso < 0) erros.push({ campo: 'Peso', valor: peso, mensagem: 'Valores negativos não são aceitos!' });
@@ -83,17 +88,45 @@ function calcularTMB() {
         return;
     }
 
+    // Fórmula Mifflin–St Jeor
     let tmb;
-    if (sexo === 'masculino')
+    if (sexo === 'masculino') {
         tmb = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * idade);
-    else
+    } else {
         tmb = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * idade);
+    }
 
-    const gastoTotal = tmb * atividade;
+    // Fatores oficiais (PAL – Physical Activity Level)
+    const fatoresAtividade = {
+        'sedentario': {
+            fator: 1.2,
+            desc: 'Pouca ou nenhuma atividade física.'
+        },
+        'leve': {
+            fator: 1.375,
+            desc: 'Caminhada leve 30 min, 1–3× por semana.'
+        },
+        'moderado': {
+            fator: 1.55,
+            desc: 'Treino moderado 30–60 min, 3–5× por semana.'
+        },
+        'intenso': {
+            fator: 1.725,
+            desc: 'Treino de musculação pesado (~1 h diário), trabalho físico intenso ou prática esportiva frequente.'
+        },
+        'muito_intenso': {
+            fator: 1.9,
+            desc: 'Atleta, 2 treinos por dia ou rotina altamente ativa.'
+        }
+    };
+
+    const atividadeInfo = fatoresAtividade[atividade];
+    const gastoTotal = tmb * atividadeInfo.fator;
 
     document.getElementById('resultadoTmb').innerHTML = `
-        <strong>Seu metabolismo basal:</strong> ${tmb.toFixed(0)} kcal/dia<br>
-        <strong>Gasto calórico total estimado:</strong> ${gastoTotal.toFixed(0)} kcal/dia
+        <strong>Metabolismo Basal (TMB):</strong> ${tmb.toFixed(0)} kcal/dia<br>
+        <strong>Gasto calórico total estimado:</strong> ${gastoTotal.toFixed(0)} kcal/dia<br>
+        <em>Nível de atividade:</em> ${atividadeInfo.desc}<br><br>
     `;
 }
 
@@ -126,6 +159,7 @@ function calcularProteina() {
 console.log('ShapeCalc validando múltiplos campos com mensagens detalhadas!');
 
 
+// -------------------- MINI GAME --------------------
 let startGame = document.getElementById("startGame");
 let gameScreen = document.getElementById("gameScreen");
 let player = document.getElementById("player");
