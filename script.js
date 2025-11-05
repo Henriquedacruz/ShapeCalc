@@ -23,7 +23,6 @@ function mostrarErros(idResultado, erros) {
     }, 6000);
 }
 
-
 // -------------------- IMC --------------------
 function calcularIMC() {
     const peso = parseFloat(document.getElementById('peso')?.value);
@@ -156,8 +155,31 @@ function calcularProteina() {
     `;
 }
 
-console.log('ShapeCalc validando múltiplos campos com mensagens detalhadas!');
+// -------------------- ÁGUA --------------------
+function calcularAgua() {
+    const peso = parseFloat(document.getElementById('pesoAgua')?.value);
 
+    if (isNaN(peso)) return;
+
+    const erros = [];
+
+    if (peso < 0) erros.push({ campo: 'Peso', valor: peso, mensagem: 'Valores negativos não são aceitos!' });
+    if (peso > 200) erros.push({ campo: 'Peso', valor: peso, mensagem: 'www.quilosmortais.com' });
+
+    if (erros.length > 0) {
+        mostrarErros('resultadoAgua', erros);
+        return;
+    }
+
+    const agua = (peso * 35) / 1000;
+
+    document.getElementById('resultadoAgua').innerHTML = `
+        <strong>Você deve consumir aproximadamente:</strong><br>
+        ${agua.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 3 })} litros de água por dia 💧 
+    `;
+    //alternativa antiga
+    // ${agua.toFixed(2).replace('.', ',')} litros de água por dia 💧
+}
 
 // -------------------- MINI GAME --------------------
 let startGame = document.getElementById("startGame");
